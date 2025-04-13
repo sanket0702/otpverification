@@ -74,7 +74,7 @@ export default function MobileOtpLogin() {
   return (
     <div className="glass-container">
       <motion.div
-        className="glass-card"
+        className={` mobilenumber  ${step === 2  ? "glass-card" : ""}`}
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
       >
