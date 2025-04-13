@@ -1,0 +1,136 @@
+body {
+    margin: 0;
+    font-family: "Segoe UI", sans-serif;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .glass-container {
+    margin-bottom: 160px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+   
+    height: 100vh;
+    
+  }
+  
+  .glass-card {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 30px 0px;
+    border-radius: 20px;
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.3);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: white;
+    text-align: center;
+    width: 100%;
+    width: 420px;
+    
+  }
+  
+  .glass-title {
+    font-size: 24px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center
+  }
+  
+  .glass-input {
+    padding: 12px 1px;
+    border-radius: 12px;
+    border: none;
+    width: 100%;
+    margin-bottom: 20px;
+    font-size: 16px;
+    gap:10px
+  }
+  
+  .glass-button {
+    background: #4f46e5;
+    color: white;
+    padding: 12px;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 16px;
+    width: 100%;
+    transition: 0.3s ease;
+  }
+  
+  .glass-button:hover {
+    background: #4338ca;
+  }
+  
+  .glass-button.green {
+    background: #22c55e;
+  }
+  
+  .glass-button.green:hover {
+    background: #16a34a;
+  }
+  
+  .glass-otp-box {
+    
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+    margin-bottom: 20px;
+    
+    width: 100%;
+    
+   
+  }
+  .icons-otp{
+    width: 40px;
+    height: 40px;
+  }
+  .glass-otp-input {
+    width: 50px;
+    height: 50px;
+    text-align: center;
+    font-size: 24px;
+    border-radius: 10px;
+    border: none;
+    background-color: rgb(223, 238, 251);
+    color: black;
+    font-weight: 700;
+    
+    gap:4px
+  }
+  
+  .verified-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .verified-icon {
+    width: 60px;
+    height: 60px;
+    color: #22c55e;
+  }
+  
+  .verified-text {
+    font-size: 20px;
+    margin-top: 10px;
+  }
+  
+  /* Shake Animation */
+  @keyframes shake {
+    0% { transform: translateX(0); }
+    20% { transform: translateX(-8px); }
+    40% { transform: translateX(8px); }
+    60% { transform: translateX(-6px); }
+    80% { transform: translateX(6px); }
+    100% { transform: translateX(0); }
+  }
+  
+  .shake {
+    animation: shake 0.5s ease-in-out;
+  }
+  
