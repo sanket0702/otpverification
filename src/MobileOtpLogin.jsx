@@ -1,43 +1,56 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { CheckCircleIcon } from "@heroicons/react/24/solid";
 import "./MobileOtpLogin.css";
 import { sendOtp } from "./api"; // Your API function for sending OTP
 
-
 export default function MobileOtpLogin() {
-  const [step, setStep] = useState(1);
+  const [step, setStep] = useState(2); // Set to 1 for real use
   const [mobile, setMobile] = useState("");
-  const [otp, setOtp] = useState(["", "", "", "","", "",]);
+  const [otp, setOtp] = useState(["", "", "", "", "", ""]);
   const [otpFromApi, setOtpFromApi] = useState("");
   const [verified, setVerified] = useState(false);
   const [shake, setShake] = useState(false);
   const inputs = useRef([]);
 
-  /**************** */
+  // Focus first input when step changes to OTP input
+  useEffect(() => {
+    if (step === 2) {
+      setTimeout(() => inputs.current[0]?.focus(), 200);
+    }
+  }, [step]);
+
   const handleKeyDown = (e, index) => {
     if (e.key === "Backspace") {
       const newOtp = [...otp];
-  
-      if (otp[index] === "") {
-        if (index > 0) {
-          inputs.current[index - 1].focus();
-          newOtp[index - 1] = "";
-          setOtp(newOtp);
-        }
+      if (otp[index] === "" && index > 0) {
+        setTimeout(() => inputs.current[index - 1]?.focus(), 10);
+        newOtp[index - 1] = "";
       } else {
         newOtp[index] = "";
-        setOtp(newOtp);
       }
+      setOtp(newOtp);
     }
   };
+
+  const handleOtpChange = (index, value) => {
+    if (!/^[0-9]?$/.test(value)) return;
+
+    const newOtp = [...otp];
+    newOtp[index] = value;
+    setOtp(newOtp);
+
+    if (value && index < otp.length - 1) {
+      setTimeout(() => inputs.current[index + 1]?.focus(), 10);
+    }
+  };
+
   const handleMobileSubmit = async () => {
     if (mobile.length >= 10 && mobile.length <= 14) {
       try {
-        const response = await sendOtp(mobile);
+        const response = await sendOtp(`+91${mobile}`);
         setOtpFromApi(response.verify_code);
         setStep(2);
-        setTimeout(() => inputs.current[0]?.focus(), 300);
         console.log("📨 OTP Sent:", response.verify_code);
       } catch (error) {
         console.error(error);
@@ -46,14 +59,6 @@ export default function MobileOtpLogin() {
     } else {
       alert("📱 Enter a valid 10-digit mobile number.");
     }
-  };
-
-  const handleOtpChange = (index, value) => {
-    if (!/^[0-9]?$/.test(value)) return;
-    const newOtp = [...otp];
-    newOtp[index] = value;
-    setOtp(newOtp);
-    if (value && index < 3) inputs.current[index + 1]?.focus();
   };
 
   const verifyOtp = () => {
@@ -65,16 +70,19 @@ export default function MobileOtpLogin() {
       }, 500);
     } else {
       setShake(true);
-      navigator.vibrate?.(300);
-      setOtp(["", "", "", ""]);
-      setTimeout(() => setShake(false), 500);
+      navigator.vibrate?.(300); // mobile vibration
+      setOtp(["", "", "", "", "", ""]);
+      setTimeout(() => {
+        setShake(false);
+        inputs.current[0]?.focus();
+      }, 500);
     }
   };
 
   return (
     <div className="glass-container">
       <motion.div
-        className={` mobilenumber  ${step === 2  ? "glass-card" : ""}`}
+        className={`mobilenumber ${step === 2 ? "glass-card" : ""}`}
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
       >
@@ -86,7 +94,14 @@ export default function MobileOtpLogin() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
             >
-              <h2 className="glass-title"><img className="icons-otp" src="https://img.icons8.com/?size=100&id=8cWmD9lajgRn&format=png&color=000000"/> Mobile Login</h2>
+              <h2 className="glass-title">
+                <img
+                  className="icons-otp"
+                  src="https://img.icons8.com/?size=100&id=8cWmD9lajgRn&format=png&color=000000"
+                  alt="mobile"
+                />{" "}
+                Mobile Login
+              </h2>
               <input
                 type="text"
                 maxLength={10}
@@ -108,18 +123,28 @@ export default function MobileOtpLogin() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
             >
-              <h2 className="glass-title"><img className="icons-otp"  src="https://img.icons8.com/?size=100&id=vjOiS3RlnWyd&format=png&color=000000"/> Enter OTP</h2>
+              <h2 className="glass-title">
+                <img
+                  className="icons-otp"
+                  src="https://img.icons8.com/?size=100&id=vjOiS3RlnWyd&format=png&color=000000"
+                  alt="otp"
+                />{" "}
+                Enter OTP
+              </h2>
               <div className={`glass-otp-box ${shake ? "shake" : ""}`}>
                 {otp.map((digit, index) => (
                   <input
                     key={index}
                     ref={(el) => (inputs.current[index] = el)}
-                    type="text"
+                    type="tel"
+                    inputMode="numeric"
+                    pattern="[0-9]*"
                     maxLength="1"
                     value={digit}
                     onChange={(e) => handleOtpChange(index, e.target.value)}
                     onKeyDown={(e) => handleKeyDown(e, index)}
                     className="glass-otp-input"
+                    autoComplete="one-time-code"
                   />
                 ))}
               </div>
