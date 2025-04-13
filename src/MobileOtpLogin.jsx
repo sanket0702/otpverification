@@ -5,7 +5,7 @@ import "./MobileOtpLogin.css";
 import { sendOtp } from "./api"; // Your API function for sending OTP
 
 export default function MobileOtpLogin() {
-  const [step, setStep] = useState(2); // Set to 1 for real use
+  const [step, setStep] = useState(1); // Set to 1 for real use
   const [mobile, setMobile] = useState("");
   const [otp, setOtp] = useState(["", "", "", "", "", ""]);
   const [otpFromApi, setOtpFromApi] = useState("");
