@@ -6,7 +6,7 @@ import { sendOtp } from "./api"; // Your API function for sending OTP
 
 
 export default function MobileOtpLogin() {
-  const [step, setStep] = useState(2);
+  const [step, setStep] = useState(1);
   const [mobile, setMobile] = useState("");
   const [otp, setOtp] = useState(["", "", "", "","", "",]);
   const [otpFromApi, setOtpFromApi] = useState("");
