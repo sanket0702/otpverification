@@ -1,14 +1,13 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+
 import './App.css'
 import MobileOtpLogin from './MobileOtpLogin'
+import EmailOtpVerification from './EmailOtpVerification'
 function App() {
   
 
   return (
     <>
-      <MobileOtpLogin />
+      <EmailOtpVerification/>
     </>
   )
 }
