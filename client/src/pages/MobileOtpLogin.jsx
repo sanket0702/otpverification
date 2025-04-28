@@ -29,7 +29,7 @@ const MobileOtpVerification = () => {
     }
 
     try {
-      const response = await axios.post('http://localhost:5000/auth/send-verification-code-mobile', {mobile});
+      const response = await axios.post('https://otpverification-9em1.onrender.com/auth/send-verification-code-mobile', {mobile});
       setServerOtp(response.verify_code);
       setOtpSent(true);
       setMessage('OTP sent successfully to your mobile!');

@@ -29,7 +29,7 @@ const EmailOtpVerification = () => {
     }
 
     try {
-      const response = await axios.post('http://localhost:5000/auth/send-verification-code-email', { email });
+      const response = await axios.post('https://otpverification-9em1.onrender.com/auth/send-verification-code-email', { email });
       setServerOtp(response.data.code);
       setOtpSent(true);
       setMessage('OTP sent successfully to your email!');
