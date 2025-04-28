@@ -1,0 +1,57 @@
+/* Container style */
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100vh;
+    width: 100vw;
+    padding: 20px;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+  }
+  
+  /* Button container style */
+  .button-container {
+    margin-bottom: 20px;
+    display: flex;
+    
+    width: 250px;
+    justify-content: space-between;
+  }
+  
+  /* Common button style */
+  .button {
+    padding: 12px 30px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    border: none;
+    transition: all 0.3s ease;
+  }
+  
+  .button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Active button style */
+  .button.active {
+    background-color: #4caf50;
+    color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Inactive button style */
+  .button.inactive {
+    background-color: #f1f1f1;
+    color: #333;
+  }
+  
+
+  @media (max-width: 480px) {
+    .container{
+        height: 80vh;
+    }
+  }
+  

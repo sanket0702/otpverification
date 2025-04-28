@@ -1,8 +1,8 @@
 import axios from 'axios';
 
-const API_KEY = "f9a07d5be2msh10c974db46924d0p1a337ajsn78a9579d666f";
+const API_KEY = "60dd5f2ae4mshae0d7043a30f4ffp1e9ca1jsnbbdbf7b850f6";
 
-export const sendOtp = async (phoneNumber) => {
+export const sendMobileOtp = async (phoneNumber) => {
     const formattedNumber = phoneNumber.startsWith('+91')
     ? phoneNumber
     : `+91${phoneNumber}`;

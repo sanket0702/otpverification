@@ -1,13 +1,14 @@
 
 import './App.css'
-import MobileOtpLogin from './MobileOtpLogin'
-import EmailOtpVerification from './EmailOtpVerification'
+
+import EmailOtpVerification from './pages/EmailOtpVerification'
+import MainPage from './pages/Main'
 function App() {
   
 
   return (
     <>
-      <EmailOtpVerification/>
+      <MainPage/>
     </>
   )
 }
